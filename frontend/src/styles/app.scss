@@ -1,0 +1,19 @@
+$orange:#f85e00;
+$cream:#f4f1eb;
+$pink:#fca534;
+@import "../index.css";
+@import "./login.scss";
+
+
+header{
+    > h1{
+        color: $orange;
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+    > nav{
+        color: $pink;
+        font-size: 1.2rem;
+        font-weight: 400;
+    }
+}
