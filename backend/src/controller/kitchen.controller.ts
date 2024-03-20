@@ -11,9 +11,11 @@ export const addKitchen = TryCatch(async(req,res,next)=>{
 
     const {name} = req.body;
 
-    const kitchen = await Kitchen.create({owner:user,name});
+    const kitchenPromise = Kitchen.create({owner:user,name});
 
-    const findUser = await User.findById(user);
+    const findUserPromise =  User.findById(user);
+
+    const [kitchen,findUser] = await Promise.all([kitchenPromise,findUserPromise]);
 
     if(findUser) {
         findUser.owner = kitchen._id;
@@ -25,4 +27,5 @@ export const addKitchen = TryCatch(async(req,res,next)=>{
         success:true,
         kitchen
     })
-})
+});
+

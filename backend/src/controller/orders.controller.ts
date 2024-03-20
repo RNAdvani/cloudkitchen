@@ -3,11 +3,11 @@ import { Order } from "../models/Order";
 import { TryCatch } from "../utils/utility-class";
 
 export const createOrder = TryCatch(async(req,res,next)=>{
-    const {items,total,subTotal,discount,deliveryCharges} = req.body;
+    const {items,total,subTotal,discount,deliveryCharges,address} = req.body;
     const {user,restaurant} = req.query
     if(!user) return next(new ErrorHandler(400,"Kindly Login to place Order"));
 
-    const order = await Order.create({items,total,subTotal,discount,deliveryCharges,restaurant,user})
+    const order = await Order.create({items,total,subTotal,discount,deliveryCharges,restaurant,user,address})
 
     res.status(201).json({
         success:true,
@@ -60,4 +60,22 @@ export const updateOrderStatus = TryCatch(async(req,res,next)=>{
     if(!id) return next(new ErrorHandler(400,"Bad Request"));
 
     const order = await Order.findById(id);
-})
+
+    if(!order) return next(new ErrorHandler(404,"Order Not Found"))
+
+    switch(order.status){
+        case "accepted":order.status = "preparing";
+        break;
+        case "preparing":order.status = "delivering";
+        break;
+        default:order.status = "delivering"
+    }
+
+    await order.save();
+
+    res.status(200).json({
+        success:true,
+        message:`Order status updated to ${order.status}`
+    })
+});
+

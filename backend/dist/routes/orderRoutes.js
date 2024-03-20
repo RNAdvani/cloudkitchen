@@ -10,4 +10,6 @@ const authRoles_1 = require("../middleware/authRoles");
 const app = express_1.default.Router();
 exports.orderRoutes = app;
 app.post("/new", (0, authRoles_1.authRoles)("user"), orders_controller_1.createOrder);
-app.get("/my", orders_controller_1.allOrders);
+app.get("/my", (0, authRoles_1.authRoles)("user"), orders_controller_1.allOrders);
+app.get("/received/:kitchen", (0, authRoles_1.authRoles)("chef"), orders_controller_1.receivedOrders);
+app.post("/update/:id", (0, authRoles_1.authRoles)("chef"), orders_controller_1.updateOrderStatus);

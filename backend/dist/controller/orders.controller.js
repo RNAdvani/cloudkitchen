@@ -5,11 +5,11 @@ const error_1 = require("../middleware/error");
 const Order_1 = require("../models/Order");
 const utility_class_1 = require("../utils/utility-class");
 exports.createOrder = (0, utility_class_1.TryCatch)(async (req, res, next) => {
-    const { items, total, subTotal, discount, deliveryCharges } = req.body;
+    const { items, total, subTotal, discount, deliveryCharges, address } = req.body;
     const { user, restaurant } = req.query;
     if (!user)
         return next(new error_1.ErrorHandler(400, "Kindly Login to place Order"));
-    const order = await Order_1.Order.create({ items, total, subTotal, discount, deliveryCharges, restaurant, user });
+    const order = await Order_1.Order.create({ items, total, subTotal, discount, deliveryCharges, restaurant, user, address });
     res.status(201).json({
         success: true,
         message: "Order Placed successfully"
@@ -50,4 +50,20 @@ exports.updateOrderStatus = (0, utility_class_1.TryCatch)(async (req, res, next)
     if (!id)
         return next(new error_1.ErrorHandler(400, "Bad Request"));
     const order = await Order_1.Order.findById(id);
+    if (!order)
+        return next(new error_1.ErrorHandler(404, "Order Not Found"));
+    switch (order.status) {
+        case "accepted":
+            order.status = "preparing";
+            break;
+        case "preparing":
+            order.status = "delivering";
+            break;
+        default: order.status = "delivering";
+    }
+    await order.save();
+    res.status(200).json({
+        success: true,
+        message: `Order status updated to ${order.status}`
+    });
 });

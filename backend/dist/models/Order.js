@@ -13,6 +13,10 @@ const orderSchema = new mongoose_1.default.Schema({
         type: mongoose_1.default.Schema.ObjectId,
         ref: "kitchens"
     },
+    address: {
+        type: String,
+        // required:[true,"Enter address"]
+    },
     items: [{
             name: String,
             photo: {
@@ -43,6 +47,7 @@ const orderSchema = new mongoose_1.default.Schema({
         default: "accepted"
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    strict: false
 });
 exports.Order = mongoose_1.default.model("orders", orderSchema);

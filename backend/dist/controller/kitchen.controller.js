@@ -10,8 +10,9 @@ exports.addKitchen = (0, utility_class_1.TryCatch)(async (req, res, next) => {
     if (!user)
         return next(new error_1.ErrorHandler(400, "Unauth"));
     const { name } = req.body;
-    const kitchen = await CloudKitcehn_1.Kitchen.create({ owner: user, name });
-    const findUser = await User_1.User.findById(user);
+    const kitchenPromise = CloudKitcehn_1.Kitchen.create({ owner: user, name });
+    const findUserPromise = User_1.User.findById(user);
+    const [kitchen, findUser] = await Promise.all([kitchenPromise, findUserPromise]);
     if (findUser) {
         findUser.owner = kitchen._id;
         findUser.role = "chef";
