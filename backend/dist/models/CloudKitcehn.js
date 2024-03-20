@@ -8,19 +8,23 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const kitchenSchema = new mongoose_1.default.Schema({
     name: {
         type: String,
-        required: [true, "Please Enter Kitche Name"]
+        required: true
     },
     owner: {
-        type: mongoose_1.default.Schema.ObjectId,
-        ref: "users"
+        type: String,
     },
     isOpenNow: {
         type: Boolean,
+        default: false
     },
     photo: {
         public_id: String,
         url: String
-    }
+    },
+    closedPermanent: {
+        type: Boolean,
+        default: false
+    },
 }, {
     timestamps: true
 });

@@ -26,6 +26,10 @@ const dishSchema = new mongoose.Schema<IDishes>({
         type:mongoose.Schema.ObjectId,
         ref:"kitchens"
     },
+    cuisine:{
+        type:String,
+        required:[true,"Please enter Dish Cuisine"]
+    },
     typeOfDish:{
         type:String,
         enum:["veg","non-veg"]

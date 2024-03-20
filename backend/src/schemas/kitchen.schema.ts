@@ -1,12 +1,11 @@
 export interface IKitchen {
     name:string;
-    owner:Object;
+    owner:string;
     photo:{
         public_id:string,
         url:string
     };
     about:String;
     isOpenNow:boolean;
-    requestStatus?: "reviewing" | "accepted" |"rejected";
     closedPermanent : boolean
 }

@@ -2,7 +2,11 @@ import mongoose, { mongo } from "mongoose";
 
 const orderSchema = new mongoose.Schema({
     user:{
-        type:mongoose.Schema.ObjectId
+        type:String,
+    },
+    restaurant:{
+        type:mongoose.Schema.ObjectId,
+        ref:"kitchens"
     },
     items:[{
         name:String,
@@ -27,6 +31,11 @@ const orderSchema = new mongoose.Schema({
     total:{
         type:Number,
         required:true
+    },
+    status:{
+        type:String,
+        enum:["accepted","preparing","delivering"],
+        default:"accepted"
     }
 },{
     timestamps:true

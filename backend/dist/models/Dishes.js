@@ -30,6 +30,10 @@ const dishSchema = new mongoose_1.default.Schema({
         type: mongoose_1.default.Schema.ObjectId,
         ref: "kitchens"
     },
+    cuisine: {
+        type: String,
+        required: [true, "Please enter Dish Cuisine"]
+    },
     typeOfDish: {
         type: String,
         enum: ["veg", "non-veg"]

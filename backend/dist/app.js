@@ -11,12 +11,18 @@ const error_1 = require("./middleware/error");
 dotenv_1.default.config({ path: "../backend/config.env" });
 const cors_1 = __importDefault(require("cors"));
 const morgan_1 = __importDefault(require("morgan"));
+const kitchenRoutes_1 = require("./routes/kitchenRoutes");
+const dishesRoutes_1 = require("./routes/dishesRoutes");
+const orderRoutes_1 = require("./routes/orderRoutes");
 const app = (0, express_1.default)();
 (0, utility_class_1.connectDb)(`${process.env.MONGO_URI}`);
 app.use(express_1.default.json());
 app.use((0, morgan_1.default)("dev"));
 app.use((0, cors_1.default)());
 app.use("/api/v1/user", userRoutes_1.userRoutes);
+app.use("/api/v1/kitchen", kitchenRoutes_1.kitchenRoutes);
+app.use("/api/v1/dish", dishesRoutes_1.dishesROutes);
+app.use("/api/v1/order", orderRoutes_1.orderRoutes);
 app.use(error_1.errorMiddleware);
 app.listen(process.env.PORT, () => {
     console.log(`Server running on port ${process.env.PORT}`);

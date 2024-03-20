@@ -7,9 +7,7 @@ const kitchenSchema = new mongoose.Schema<IKitchen>({
         required:true
     },
     owner:{
-        type:mongoose.Schema.ObjectId,
-        ref:"users",
-        required:true
+        type:String,
     },
     isOpenNow:{
         type:Boolean,
@@ -19,14 +17,10 @@ const kitchenSchema = new mongoose.Schema<IKitchen>({
         public_id:String,
         url:String
     },
-    requestStatus:{
-        type:String,
-        default:"reviewing"
-    },
     closedPermanent:{
         type:Boolean,
         default:false
-    }
+    },
 },{
     timestamps:true
 })

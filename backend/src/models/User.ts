@@ -36,6 +36,10 @@ const userSchema = new mongoose.Schema<IUser>({
             type:String
         }
     },
+    owner:{
+        type:mongoose.Schema.ObjectId,
+        ref:"kitchens"
+    },
     createdAt:Date,
     updatedAt:Date,
 },{

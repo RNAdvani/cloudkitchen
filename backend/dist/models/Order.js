@@ -7,7 +7,11 @@ exports.Order = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const orderSchema = new mongoose_1.default.Schema({
     user: {
-        type: mongoose_1.default.Schema.ObjectId
+        type: String,
+    },
+    restaurant: {
+        type: mongoose_1.default.Schema.ObjectId,
+        ref: "kitchens"
     },
     items: [{
             name: String,
@@ -32,6 +36,11 @@ const orderSchema = new mongoose_1.default.Schema({
     total: {
         type: Number,
         required: true
+    },
+    status: {
+        type: String,
+        enum: ["accepted", "preparing", "delivering"],
+        default: "accepted"
     }
 }, {
     timestamps: true

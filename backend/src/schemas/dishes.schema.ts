@@ -5,8 +5,9 @@ export interface IDishes{
         public_id:string,
         url:string
     };
-    price:Number;
+    price:number;
     restaurant:Object;
+    cuisine:string
     typeOfDish:"veg"|"non-veg";
     isAvailableInJain:boolean;
     allergens:string;

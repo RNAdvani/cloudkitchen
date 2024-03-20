@@ -40,6 +40,10 @@ const userSchema = new mongoose_1.default.Schema({
             type: String
         }
     },
+    owner: {
+        type: mongoose_1.default.Schema.ObjectId,
+        ref: "kitchens"
+    },
     createdAt: Date,
     updatedAt: Date,
 }, {

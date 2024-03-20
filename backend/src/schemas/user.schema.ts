@@ -10,4 +10,5 @@ export interface IUser extends Document{
         public_id:string,
         url:string
     }
+    owner:Object
 }

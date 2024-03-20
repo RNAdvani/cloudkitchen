@@ -6,6 +6,9 @@ import { errorMiddleware } from './middleware/error';
 dotenv.config({path:"../backend/config.env"})
 import cors from "cors"
 import morgan from 'morgan'
+import { kitchenRoutes } from './routes/kitchenRoutes';
+import { dishesROutes } from './routes/dishesRoutes';
+import { orderRoutes } from './routes/orderRoutes';
 
 const app = express();
 
@@ -15,6 +18,9 @@ app.use(morgan("dev"))
 app.use(cors())
 
 app.use("/api/v1/user",userRoutes);
+app.use("/api/v1/kitchen",kitchenRoutes);
+app.use("/api/v1/dish",dishesROutes);
+app.use("/api/v1/order",orderRoutes);
 
 
 app.use(errorMiddleware);
