@@ -25,6 +25,15 @@ const kitchenSchema = new mongoose_1.default.Schema({
         type: Boolean,
         default: false
     },
+    ratings: {
+        type: Number,
+        default: 0
+    },
+    reviews: [{
+            user: String,
+            rating: Number,
+            review: String,
+        }]
 }, {
     timestamps: true
 });

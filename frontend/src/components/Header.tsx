@@ -50,7 +50,7 @@ const menuItems = [
 
   return (
     <div className="relative w-full bg-transparent">
-      <div className="mx-auto flex items-center justify-between px-4 py-2 sm:px-6 lg:px-10">
+      <div className="mx-auto flex items-center justify-between py-2 sm:px-6 lg:px-10">
         <div className="inline-flex items-center  space-x-2">
           <span>
             <svg

@@ -21,6 +21,15 @@ const kitchenSchema = new mongoose.Schema<IKitchen>({
         type:Boolean,
         default:false
     },
+    ratings:{
+        type:Number,
+        default:0
+    },
+    reviews:[{
+        user:String,
+        rating:Number,
+        review:String,
+    }]
 },{
     timestamps:true
 })

@@ -7,5 +7,13 @@ export interface IKitchen {
     };
     about:String;
     isOpenNow:boolean;
-    closedPermanent : boolean
+    closedPermanent : boolean;
+    reviews:[
+        {
+            user:string,
+            rating:number,
+            review:string,
+        }
+    ];
+    ratings:number
 }

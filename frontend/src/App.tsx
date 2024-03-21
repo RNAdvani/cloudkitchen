@@ -16,7 +16,7 @@ const SignUp = lazy(()=>import("./pages/Register"));
 
 function App() {
 
-  const {user,loading} = useSelector((state:{userReducer:userInitialState})=>state.userReducer)
+  const {user} = useSelector((state:{userReducer:userInitialState})=>state.userReducer)
   const dispatch = useDispatch()
 
 

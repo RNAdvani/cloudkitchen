@@ -7,7 +7,7 @@ export type User ={
         public_id:string,
         url:string
     }
-    role?:"admin" | "user"
+    role?:"admin" | "user" | "chef"
 }
 
 export type userInitialState = {
