@@ -13,3 +13,4 @@ app.post("/new", (0, authRoles_1.authRoles)("user"), orders_controller_1.createO
 app.get("/my", (0, authRoles_1.authRoles)("user"), orders_controller_1.allOrders);
 app.get("/received/:kitchen", (0, authRoles_1.authRoles)("chef"), orders_controller_1.receivedOrders);
 app.post("/update/:id", (0, authRoles_1.authRoles)("chef"), orders_controller_1.updateOrderStatus);
+app.get("/current/:restaurant", orders_controller_1.currentOrders);

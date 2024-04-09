@@ -1,4 +1,4 @@
-import { User } from "./types";
+import { Kitchen, Order, User } from "./types";
 
 export type MessageResponse = {
     success:boolean;
@@ -12,4 +12,14 @@ export type userResponse = {
 
 export type firebaseErrorResponse = {
     message:string
+}
+
+export type openStatusResponse = {
+    success:boolean,
+    kitchen:Kitchen | null
+}
+
+export type currentOrdersResponse = {
+    success:true,
+    currentOrders:Order[]
 }

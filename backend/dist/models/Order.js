@@ -23,7 +23,8 @@ const orderSchema = new mongoose_1.default.Schema({
                 public_id: String,
                 url: String
             },
-            price: Number
+            price: Number,
+            quantity: Number
         }],
     subTotal: {
         type: Number,

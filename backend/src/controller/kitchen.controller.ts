@@ -4,7 +4,7 @@ import { Kitchen } from "../models/CloudKitcehn";
 import { User } from "../models/User";
 import { TryCatch } from "../utils/utility-class";
 import mongoose, { Mongoose } from "mongoose";
-import { Stream } from "stream";
+
 
 
 export const addKitchen = TryCatch(async(req,res,next)=>{
@@ -81,6 +81,36 @@ export const addReview = TryCatch(async(req,res,next)=>{
     res.status(200).json({
         success:true,
         message:"Review Added",
+    })
+});
+
+
+// Toggle kitchen status
+
+export const toggleKitchen = TryCatch(async(req,res,next)=>{
+    const {restaurant} = req.params;
+    if(!restaurant) return next(new ErrorHandler(403,"Unauthorized"));
+
+    const kitchen = await Kitchen.findById(restaurant)
+
+    if(!kitchen) return next(new ErrorHandler(404,"Kitchen not found"));
+
+    await kitchen.updateOne({isOpenNow:!kitchen.isOpenNow});
+
+    res.status(200).json({
+        success:true,
+        message: `${kitchen.name} is ${kitchen.isOpenNow?"close" :"open"} now`
+    })
+});
+
+export const isOpen = TryCatch(async(req,res,next)=>{
+    const {restaurant} = req.params;
+    const kitchen = await Kitchen.findById(restaurant).select("isOpenNow name")
+    if(!kitchen) return next(new ErrorHandler(404,"Kitchen not found"));
+
+    res.status(200).json({
+      success:true,
+      kitchen
     })
 })
 

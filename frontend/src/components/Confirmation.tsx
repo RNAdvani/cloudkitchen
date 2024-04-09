@@ -6,8 +6,9 @@ type ConfirmationType ={
 }
 
 function Confirmation({isConfirm,message,funcConfirm, funcClose}:ConfirmationType) {
+
  return (isConfirm && (
-    <div className="confirmation-modal h-[100vh] bg-[rgba(0,0,0,0.4)] absolute w-[100vw] justify-center top-0 z-40 grid items-center">
+    <div className={`confirmation-modal h-full bg-[rgba(0,0,0,0.4)] absolute w-[100vw] justify-center top-0 z-40 grid items-center`}>
        <div className="bg-[#f4f1eb] h-[9.5rem] px-4 py-2 aspect-video flex flex-col justify-between items-center rounded-lg">
             <h3 className="text-[1.1rem] font-[500] pt-4">Are You Sure You want to {message}?</h3>
            <div className="w-[100%] items-end flex gap-2 justify-end">

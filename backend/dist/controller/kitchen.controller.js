@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addReview = exports.addKitchen = void 0;
+exports.isOpen = exports.toggleKitchen = exports.addReview = exports.addKitchen = void 0;
 const error_1 = require("../middleware/error");
 const CloudKitcehn_1 = require("../models/CloudKitcehn");
 const User_1 = require("../models/User");
@@ -67,5 +67,29 @@ exports.addReview = (0, utility_class_1.TryCatch)(async (req, res, next) => {
     res.status(200).json({
         success: true,
         message: "Review Added",
+    });
+});
+// Toggle kitchen status
+exports.toggleKitchen = (0, utility_class_1.TryCatch)(async (req, res, next) => {
+    const { restaurant } = req.params;
+    if (!restaurant)
+        return next(new error_1.ErrorHandler(403, "Unauthorized"));
+    const kitchen = await CloudKitcehn_1.Kitchen.findById(restaurant);
+    if (!kitchen)
+        return next(new error_1.ErrorHandler(404, "Kitchen not found"));
+    await kitchen.updateOne({ isOpenNow: !kitchen.isOpenNow });
+    res.status(200).json({
+        success: true,
+        message: `${kitchen.name} is ${kitchen.isOpenNow ? "close" : "open"} now`
+    });
+});
+exports.isOpen = (0, utility_class_1.TryCatch)(async (req, res, next) => {
+    const { restaurant } = req.params;
+    const kitchen = await CloudKitcehn_1.Kitchen.findById(restaurant).select("isOpenNow name");
+    if (!kitchen)
+        return next(new error_1.ErrorHandler(404, "Kitchen not found"));
+    res.status(200).json({
+        success: true,
+        kitchen
     });
 });

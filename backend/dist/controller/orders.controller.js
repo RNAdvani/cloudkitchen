@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateOrderStatus = exports.receivedOrders = exports.allOrders = exports.viewOrder = exports.createOrder = void 0;
+exports.updateOrderStatus = exports.currentOrders = exports.receivedOrders = exports.allOrders = exports.viewOrder = exports.createOrder = void 0;
 const error_1 = require("../middleware/error");
 const Order_1 = require("../models/Order");
 const utility_class_1 = require("../utils/utility-class");
@@ -43,6 +43,14 @@ exports.receivedOrders = (0, utility_class_1.TryCatch)(async (req, res, next) =>
     res.status(200).json({
         success: true,
         orders
+    });
+});
+exports.currentOrders = (0, utility_class_1.TryCatch)(async (req, res, next) => {
+    const { restaurant } = req.params;
+    const currentOrders = await Order_1.Order.find({ restaurant, status: "accepted" || "preparing" });
+    res.status(200).json({
+        success: true,
+        currentOrders
     });
 });
 exports.updateOrderStatus = (0, utility_class_1.TryCatch)(async (req, res, next) => {

@@ -54,6 +54,17 @@ export const receivedOrders = TryCatch(async(req,res,next)=>{
     })
 });
 
+export const currentOrders = TryCatch(async(req,res,next)=>{
+    const {restaurant} = req.params;
+
+    const currentOrders =await Order.find({restaurant,status:"accepted" || "preparing"})
+
+    res.status(200).json({
+      success:true,
+      currentOrders
+    })
+})
+
 export const updateOrderStatus = TryCatch(async(req,res,next)=>{
     const {id} = req.params;
 

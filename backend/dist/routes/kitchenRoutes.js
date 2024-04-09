@@ -10,3 +10,5 @@ const app = express_1.default.Router();
 exports.kitchenRoutes = app;
 app.post("/add", kitchen_controller_1.addKitchen);
 app.post("/review/:restaurant", kitchen_controller_1.addReview);
+app.post("/toggle/:restaurant", kitchen_controller_1.toggleKitchen);
+app.get("/open/:restaurant", kitchen_controller_1.isOpen);

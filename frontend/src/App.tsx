@@ -22,7 +22,7 @@ function App() {
 
 
   useEffect(()=>{
-    onAuthStateChanged(auth,async(user)=>{
+      onAuthStateChanged(auth,async(user)=>{
       if(user){
         const data = await getUser(user.uid);
         dispatch(userExist(data.user));
