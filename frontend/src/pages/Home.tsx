@@ -1,17 +1,16 @@
 'use client'
 import { CheckCircle, Star } from 'lucide-react'
 import { User } from '../types/types'
-import { lazy } from 'react'
+import { Suspense, lazy } from 'react'
+import Loader from '../components/Loader'
+import ChefPage from './ChefPage'
 
-const ChefPage = lazy(()=>import("./ChefPage"))
+
 
 
 function Home({user}:{user:User | null }) {
 
-  if(user?.role == "chef"){
-    return <ChefPage />
-  }
-
+  if(user?.role == "chef") return <ChefPage />
 
 
   return (

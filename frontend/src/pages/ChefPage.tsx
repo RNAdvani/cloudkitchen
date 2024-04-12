@@ -13,27 +13,11 @@ import { receivedOrders, useGetCurrentOrdersQuery } from "../redux/api/orderApi"
 
 function ChefPage() {
   const dispatch = useDispatch();
-
-  const order:Order = {
-    _id: "65fa905c9045be6713d0ec09",
-    items: [
-        {
-            name: "Paneer Makhani",
-            price: 375,
-            quantity:1,
-        }
-    ],
-    subTotal: 395,
-    deliveryCharges: 15,
-    total: 486,
-    status: "accepted"
-  }
-
   
   const [isOpenModal,setIsOpenModal] = useState(false);
   const {user} = useSelector((state:{userReducer:userInitialState})=>state.userReducer) 
   const {kitchen} = useSelector((state:{kitchenReducer:kitchenInitialState})=>state.kitchenReducer)
-  const [checked,setChecked] = useState(kitchen?.isOpenNow! as boolean);
+  const [checked,setChecked] = useState(false);
 
   const handleConfirm = ()=>{
     try {
@@ -92,7 +76,7 @@ return (
       </div>
       <div className="upcoming-orders w-full p-4">
           {
-            currentOrdersData?.currentOrders.map((i)=><CurrentOrders order={i} />)
+            currentOrdersData?.currentOrders.map((i)=><CurrentOrders order={i} key={i._id} />)
           }
       </div>
     </div>

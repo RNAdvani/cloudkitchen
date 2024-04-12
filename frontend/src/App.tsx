@@ -9,6 +9,7 @@ import { getUser } from './redux/api/userApi'
 import { useDispatch, useSelector } from 'react-redux'
 import { userInitialState } from './types/types'
 import { Toaster } from 'react-hot-toast'
+import Loader from './components/Loader'
 
 const Home = lazy(()=>import("./pages/Home"));
 const Login = lazy(()=>import("./pages/Login"));
@@ -35,7 +36,7 @@ function App() {
   return (
    <>
     <Router>
-      <Suspense  >
+      <Suspense fallback={<Loader />}  >
         <Routes>
           <Route element={<Outlet />} >
             <Route path='/login' element={<Login isUser={user?false:true} />}  />

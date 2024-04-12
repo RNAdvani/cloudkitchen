@@ -2,6 +2,7 @@ import toast from "react-hot-toast";
 import { Order, updateOrderStatus, userInitialState } from "../types/types"
 import { updateOrder} from '../redux/api/orderApi'
 import { useSelector } from "react-redux";
+import { memo } from "react";
 
 function CurrentOrders({order}:{order:Order}) {
 
@@ -30,11 +31,11 @@ function CurrentOrders({order}:{order:Order}) {
         <p className={ `${order.status == "accepted"?"text-yellow-500":"text-green-600"} uppercase`} onClick={()=>{if(order.status==='preparing') order.status='delivering'}}>{order.status}</p>
         <button className="p-2 bg-[#FFD2A5] rounded-md" disabled={order.status=="delivering"?true:false} onClick={(e)=>{
           e.preventDefault();
-          handleUpdate({id:order._id,user:user?._id!})
+          handleUpdate({id:order._id,user:user?._id!});
         }}>Update Status</button>
       </div>
     </div>
   )
 }
 
-export default CurrentOrders
+export default memo(CurrentOrders)
