@@ -3,7 +3,11 @@ $cream:#f4f1eb;
 $pink:#fca534;
 @import "../index.css";
 @import "./login.scss";
+@import "./dashboard";
 
+html{
+    scroll-behavior: smooth;
+}
 
 header{
     > h1{

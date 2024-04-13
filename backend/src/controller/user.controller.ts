@@ -20,7 +20,8 @@ export const registerUser = TryCatch(async(req:Request,res:Response,next:NextFun
 
      const user = await User.create({name,email,mobile,_id,photo});
 
-    if(!photo){const photoPath = req.file?.path
+    if(photo){
+        const photoPath = req.file?.path
     if(!photoPath)  return next(new ErrorHandler(400,"Upload photo"));
 
     const response = await uploadOnCloudinary(photoPath!);
@@ -49,3 +50,28 @@ export const getUser = TryCatch(async(req,res,next)=>{
     })
 })
 
+export const updateProfile = TryCatch(async(req,res,next)=>{
+    const {id} = req.params;
+    
+    const user = await User.findById(id)
+
+    if(!user) return next(new ErrorHandler(404,"User Not found"))
+
+    const photoPath = req.file?.path
+    if(!photoPath)  return next(new ErrorHandler(400,"Upload photo"));
+
+    const response = await uploadOnCloudinary(photoPath!);
+
+    user.photo.public_id = response?.public_id || ""
+
+    user.photo.url = response?.url || ""
+
+    await user.save();
+
+    return res.status(200).json({
+        success:true,
+        message:"Profile Updated"
+    })
+
+    
+})

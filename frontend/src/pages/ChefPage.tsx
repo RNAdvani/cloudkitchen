@@ -1,21 +1,22 @@
-import { Switch } from "@mui/material"
+import { Switch, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import Confirmation from "../components/Confirmation"
 import { PiCookingPotBold } from "react-icons/pi";
-import { isOpenStatusApi, toggleKitchen, useIsOpenQuery } from "../redux/api/chefApi";
+import { isOpenStatusApi, toggleKitchen } from "../redux/api/chefApi";
 import { useDispatch, useSelector } from "react-redux";
-import { Order, kitchenInitialState, userInitialState } from "../types/types";
+import { kitchenInitialState, userInitialState } from "../types/types";
 import CurrentOrders from "../components/CurrentOrders";
 import { kitchenExists, kitchenNotExists } from "../redux/reducer/kitchenReducer";
 import toast from "react-hot-toast";
-import { receivedOrders, useGetCurrentOrdersQuery } from "../redux/api/orderApi";
+import {  useGetCurrentOrdersQuery } from "../redux/api/orderApi";
+import MoodIcon from '@mui/icons-material/Mood';
 
 
 function ChefPage() {
   const dispatch = useDispatch();
   
   const [isOpenModal,setIsOpenModal] = useState(false);
-  const {user} = useSelector((state:{userReducer:userInitialState})=>state.userReducer) 
+  const {user,loading} = useSelector((state:{userReducer:userInitialState})=>state.userReducer) 
   const {kitchen} = useSelector((state:{kitchenReducer:kitchenInitialState})=>state.kitchenReducer)
   const [checked,setChecked] = useState(false);
 
@@ -49,6 +50,7 @@ const isOpenStatus = async()=>{
 
 const {data:currentOrdersData} = useGetCurrentOrdersQuery({id:user?.owner!,user:user?._id!});
 
+
 useEffect(()=>{
   isOpenStatus() ;
 },[checked])
@@ -74,9 +76,11 @@ return (
           </div>
         </div>
       </div>
-      <div className="upcoming-orders w-full p-4">
+      <div className="upcoming-orders flex flex-col gap-2 w-full p-4">
           {
-            currentOrdersData?.currentOrders.map((i)=><CurrentOrders order={i} key={i._id} />)
+            currentOrdersData?.currentOrders.length === 0 ?  (<Typography variant="h6" textAlign={"center"} width={"100%"} >
+              No Orders? Hang Tight  <MoodIcon /> <br /> <em>A blank order sheet is an invitation to get creative. What new product could we offer?</em>
+              </Typography>) : (currentOrdersData?.currentOrders.map((i)=><CurrentOrders order={i} key={i._id} />))
           }
       </div>
     </div>

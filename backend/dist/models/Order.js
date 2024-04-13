@@ -7,7 +7,7 @@ exports.Order = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const orderSchema = new mongoose_1.default.Schema({
     user: {
-        type: String,
+        type: String
     },
     restaurant: {
         type: mongoose_1.default.Schema.ObjectId,

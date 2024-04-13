@@ -3,12 +3,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isOpen = exports.toggleKitchen = exports.addReview = exports.addKitchen = void 0;
+exports.updateKitchen = exports.getKitchens = exports.isOpen = exports.toggleKitchen = exports.getKitchen = exports.addReview = exports.addKitchen = void 0;
 const error_1 = require("../middleware/error");
 const CloudKitcehn_1 = require("../models/CloudKitcehn");
 const User_1 = require("../models/User");
 const utility_class_1 = require("../utils/utility-class");
 const mongoose_1 = __importDefault(require("mongoose"));
+const cloudinary_1 = require("../middleware/cloudinary");
 exports.addKitchen = (0, utility_class_1.TryCatch)(async (req, res, next) => {
     const { user } = req.query;
     if (!user)
@@ -69,6 +70,16 @@ exports.addReview = (0, utility_class_1.TryCatch)(async (req, res, next) => {
         message: "Review Added",
     });
 });
+exports.getKitchen = (0, utility_class_1.TryCatch)(async (req, res, next) => {
+    const { restaurant } = req.params;
+    const kitchen = await CloudKitcehn_1.Kitchen.findById(restaurant);
+    if (!kitchen)
+        return next(new error_1.ErrorHandler(404, "Kitchen Not Found"));
+    return res.status(200).json({
+        success: true,
+        kitchen
+    });
+});
 // Toggle kitchen status
 exports.toggleKitchen = (0, utility_class_1.TryCatch)(async (req, res, next) => {
     const { restaurant } = req.params;
@@ -91,5 +102,29 @@ exports.isOpen = (0, utility_class_1.TryCatch)(async (req, res, next) => {
     res.status(200).json({
         success: true,
         kitchen
+    });
+});
+exports.getKitchens = (0, utility_class_1.TryCatch)(async (req, res, next) => {
+    const kitchens = await CloudKitcehn_1.Kitchen.find({ isOpenNow: true });
+    return res.status(200).json({
+        success: true,
+        kitchens
+    });
+});
+exports.updateKitchen = (0, utility_class_1.TryCatch)(async (req, res, next) => {
+    const { id } = req.params;
+    const kitchen = await CloudKitcehn_1.Kitchen.findById(id);
+    if (!kitchen)
+        return next(new error_1.ErrorHandler(404, "User Not found"));
+    const photoPath = req.file?.path;
+    if (!photoPath)
+        return next(new error_1.ErrorHandler(400, "Upload photo"));
+    const response = await (0, cloudinary_1.uploadOnCloudinary)(photoPath);
+    kitchen.photo.public_id = response?.public_id || "";
+    kitchen.photo.url = response?.url || "";
+    await kitchen.save();
+    return res.status(200).json({
+        success: true,
+        message: "Profile Updated"
     });
 });

@@ -1,4 +1,4 @@
-import { Kitchen, Order, User } from "./types";
+import { Dish, Kitchen, Order, User } from "./types";
 
 export type MessageResponse = {
     success:boolean;
@@ -22,4 +22,21 @@ export type openStatusResponse = {
 export type currentOrdersResponse = {
     success:true,
     currentOrders:Order[]
+}
+
+export type AllMyDishesResponse = {
+    success:true,
+    dishes: Dish[]
+}
+
+export type AllMyDishesRequest = {
+    restaurant:string
+}
+
+export type AdminDashboardResponse ={
+    success:true,
+    dashboard:{
+        numberOfOrders:number[],
+        cuisineCount:{_id:string,count:number}[]
+    }
 }

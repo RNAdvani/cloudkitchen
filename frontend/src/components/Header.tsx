@@ -8,25 +8,38 @@ import { auth } from '../firebase'
 import toast from 'react-hot-toast'
 import {  userInitialState } from '../types/types'
 import { useSelector } from 'react-redux'
+import { Typography } from '@mui/material'
 
-const menuItems = [
-  {
-    name: 'Home',
-    href: '/',
-  },
-  {
-    name: 'About',
-    href: '/about',
-  },
-  {
-    name: 'Contact',
-    href: '/contact',
-  },
-]
+
+
+
 
  function Header() {
+   const {user} = useSelector((state:{userReducer:userInitialState})=>state.userReducer)
 
- const {user} = useSelector((state:{userReducer:userInitialState})=>state.userReducer)
+  const menuItems = user?.role === "chef" ?
+  [
+    {
+      name: 'Dishes',
+      href: '/dishes',
+    },
+    {
+      name: 'Dashboard',
+      href: '/bar',
+    },
+  ]
+  : [
+    {
+      name: 'About',
+      href: '/about',
+    },
+    {
+      name: 'Cart',
+      href: '/cart',
+    },
+  ]
+  
+
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
   const [isDialogOpen, setIsDialogOpen] = React.useState(false)
@@ -51,8 +64,9 @@ const menuItems = [
   return (
     <div className="relative w-full bg-transparent">
       <div className="mx-auto flex items-center justify-between py-2 sm:px-6 lg:px-10">
-        <div className="inline-flex items-center  space-x-2">
-          <span>
+       <Link to={"/"}  style={{
+        textAlign:"center", display:"flex", justifyContent:"center",alignItems:"center"
+       }} >
             <svg
               width="30"
               height="30"
@@ -65,9 +79,12 @@ const menuItems = [
                 fill="black"
               />
             </svg>
-          </span>
-          <span className="font-bold">DevUI</span>
-        </div>
+            <Typography variant='body1' sx={{
+              fontWeight:600,
+            }} >
+            Culinary Co.
+            </Typography>
+      </Link>
         <div className="hidden grow items-start justify-start lg:flex">
           <ul className="ml-12 inline-flex  space-x-8">
             {menuItems.map((item) => (
@@ -127,7 +144,8 @@ const menuItems = [
             <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
               <div className="px-5 pb-6 pt-5">
                 <div className="flex items-center justify-between">
-                  <div className="inline-flex items-center space-x-2">
+                  <Link to={"/"} >
+                  <div  className="inline-flex items-center space-x-2">
                     <span>
                       <svg
                         width="30"
@@ -142,8 +160,9 @@ const menuItems = [
                         />
                       </svg>
                     </span>
-                    <span className="font-bold">DevUI</span>
+                    <span className="font-bold">Culinary Co.</span>
                   </div>
+                  </Link>
                   <div className="-mr-2">
                     <button
                       type="button"

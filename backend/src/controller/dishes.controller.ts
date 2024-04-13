@@ -8,7 +8,9 @@ export const addDish = TryCatch(async (req,res,next)=>{
 
     const {restaurant} = req.params;
 
-    const dish = await Dish.create({name,description,price,restaurant,typeOfDish,isAvailableInJain,cuisine,allergens})
+    if(!req.file) return next(new ErrorHandler(400,"Please Select Image"))
+
+    const dish = await Dish.create({name,description,price:Number(price),restaurant,typeOfDish,isAvailableInJain,cuisine,allergens})
 
     const path = req.file?.path
 
@@ -62,6 +64,16 @@ export const deleteDish = TryCatch(async(req,res,next)=>{
     res.status(200).json({
         success:true,
         message:`${dish.name} Deleted Successfully`
+    })
+});
+
+
+export const getAllMyDishes = TryCatch(async(req,res,next)=>{
+    const {restaurant} = req.params;
+    const dishes = await Dish.find({restaurant});
+    return res.status(200).json({
+        success:true,
+        dishes
     })
 });
 

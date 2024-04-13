@@ -14,6 +14,7 @@ const morgan_1 = __importDefault(require("morgan"));
 const kitchenRoutes_1 = require("./routes/kitchenRoutes");
 const dishesRoutes_1 = require("./routes/dishesRoutes");
 const orderRoutes_1 = require("./routes/orderRoutes");
+const admin_routes_1 = require("./routes/admin.routes");
 const app = (0, express_1.default)();
 (0, utility_class_1.connectDb)(`${process.env.MONGO_URI}`);
 app.use(express_1.default.json());
@@ -23,6 +24,7 @@ app.use("/api/v1/user", userRoutes_1.userRoutes);
 app.use("/api/v1/kitchen", kitchenRoutes_1.kitchenRoutes);
 app.use("/api/v1/dish", dishesRoutes_1.dishesROutes);
 app.use("/api/v1/order", orderRoutes_1.orderRoutes);
+app.use("/api/v1/admin", admin_routes_1.adminRoutes);
 app.use(error_1.errorMiddleware);
 app.listen(process.env.PORT, () => {
     console.log(`Server running on port ${process.env.PORT}`);

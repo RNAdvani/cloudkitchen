@@ -10,10 +10,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import { userInitialState } from './types/types'
 import { Toaster } from 'react-hot-toast'
 import Loader from './components/Loader'
+import ProtectedRotes from './components/ProtectedRotes'
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+import Dashboard from './pages/admin/Dashboard'
+import KitchenPage from './pages/KitchenPage'
 
 const Home = lazy(()=>import("./pages/Home"));
 const Login = lazy(()=>import("./pages/Login"));
 const SignUp = lazy(()=>import("./pages/Register"));
+const Dishes = lazy(()=>import("./pages/Dishes"));
 
 function App() {
 
@@ -43,7 +51,16 @@ function App() {
             <Route path='/signup' element={<SignUp isUser={user?false:true}/>}  />
           </Route>
           <Route element={<><Header /><Outlet/></>} >
-            <Route path='/'  element={<Home user={user} />} />
+            <Route path='/'  element={<Home />} />
+            {/* <Route path='/bar'  element={<BarCharts />} /> */}
+          </Route>
+          <Route element={<ProtectedRotes isChef={true} />} >
+            <Route path='/dishes'  element={<Dishes />} />
+            <Route path='/bar'  element={<Dashboard />} />
+          </Route>
+
+          <Route element={<ProtectedRotes isUser={true} />} >
+            <Route path='/kitchen/:restaurant' element={<KitchenPage />} />
           </Route>
         </Routes>
       </Suspense>

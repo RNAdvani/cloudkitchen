@@ -47,7 +47,7 @@ exports.receivedOrders = (0, utility_class_1.TryCatch)(async (req, res, next) =>
 });
 exports.currentOrders = (0, utility_class_1.TryCatch)(async (req, res, next) => {
     const { restaurant } = req.params;
-    const currentOrders = await Order_1.Order.find({ restaurant, status: "accepted" || "preparing" });
+    const currentOrders = await Order_1.Order.find({ restaurant, status: { $in: ["accepted", "preparing"] } });
     res.status(200).json({
         success: true,
         currentOrders

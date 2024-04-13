@@ -8,16 +8,23 @@ import toast from "react-hot-toast";
 export const orderApi = createApi({
     reducerPath:"orderApi",
     baseQuery:fetchBaseQuery({baseUrl:`${server}/api/v1/order/`}),
+    tagTypes:["Current-Orders"],
     endpoints:(builder)=>({
+        getCurrentOrders:builder.query<currentOrdersResponse,updateOrderStatus>({
+            query:({id,user})=>({
+                url:`${server}/api/v1/order/current/${id}`,
+                method:"GET",
+            }),
+            providesTags:["Current-Orders"]
+        }),
         updateStatus:builder.mutation<MessageResponse,updateOrderStatus>({
             query:({id,user})=>({
-                url:`update/${id}?user=${user}`,
+                url:`update/${id}`,
                 method:"POST",
-            })
+            }),
+            invalidatesTags:["Current-Orders"]
         }),
-        getCurrentOrders:builder.query<currentOrdersResponse,updateOrderStatus>({
-            query:({id,user})=>`${server}/api/v1/order/current/${id}?user=${user}`
-        })
+       
     })
 });
 

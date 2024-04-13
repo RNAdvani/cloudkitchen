@@ -9,6 +9,7 @@ import morgan from 'morgan'
 import { kitchenRoutes } from './routes/kitchenRoutes';
 import { dishesROutes } from './routes/dishesRoutes';
 import { orderRoutes } from './routes/orderRoutes';
+import { adminRoutes } from './routes/admin.routes';
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use("/api/v1/user",userRoutes);
 app.use("/api/v1/kitchen",kitchenRoutes);
 app.use("/api/v1/dish",dishesROutes);
 app.use("/api/v1/order",orderRoutes);
+app.use("/api/v1/admin",adminRoutes);
 
 
 app.use(errorMiddleware);

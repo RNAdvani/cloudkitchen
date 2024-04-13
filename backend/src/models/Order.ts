@@ -1,8 +1,8 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose, { Mongoose, mongo } from "mongoose";
 
 const orderSchema = new mongoose.Schema({
     user:{
-        type:String,
+        type:String
     },
     restaurant:{
         type:mongoose.Schema.ObjectId,

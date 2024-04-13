@@ -1,0 +1,46 @@
+.dashboard-categories {
+  width: 100%;
+  max-width: 16rem;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+  padding-bottom: 2rem;
+  > h2 {
+    margin: 1.5rem 0 2rem 0;
+    text-align: center;
+  }
+
+  > div {
+    overflow-y: auto;
+    padding-left: 0.5rem;
+  }
+
+  .category-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 1rem;
+    > h5 {
+      letter-spacing: 1px;
+      font-weight: 300;
+    }
+    > div {
+      margin-left: auto;
+      width: 6rem;
+      background-color: rgb(217, 217, 217);
+      border-radius: 20px;
+      height: 0.5rem;
+      flex: none;
+      > div {
+        border-radius: 20px;
+        height: 100%;
+      }
+    }
+    > span {
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+  }
+}
+

@@ -4,6 +4,7 @@ import { Kitchen } from "../models/CloudKitcehn";
 import { User } from "../models/User";
 import { TryCatch } from "../utils/utility-class";
 import mongoose, { Mongoose } from "mongoose";
+import { uploadOnCloudinary } from "../middleware/cloudinary";
 
 
 
@@ -84,6 +85,19 @@ export const addReview = TryCatch(async(req,res,next)=>{
     })
 });
 
+export const getKitchen = TryCatch(async(req,res,next)=>{
+    const {restaurant} = req.params;
+
+    const kitchen = await Kitchen.findById(restaurant);
+
+    if(!kitchen) return next(new ErrorHandler(404,"Kitchen Not Found"));
+
+    return res.status(200).json({
+      success:true,
+      kitchen
+    })
+})
+
 
 // Toggle kitchen status
 
@@ -114,3 +128,37 @@ export const isOpen = TryCatch(async(req,res,next)=>{
     })
 })
 
+export const getKitchens = TryCatch(async(req,res,next)=>{
+  const kitchens = await Kitchen.find({isOpenNow:true});
+  return res.status(200).json({
+    success:true,
+    kitchens
+  })
+})
+
+
+export const updateKitchen = TryCatch(async(req,res,next)=>{
+  const {id} = req.params;
+  
+  const kitchen = await Kitchen.findById(id)
+
+  if(!kitchen) return next(new ErrorHandler(404,"User Not found"))
+
+  const photoPath = req.file?.path
+  if(!photoPath)  return next(new ErrorHandler(400,"Upload photo"));
+
+  const response = await uploadOnCloudinary(photoPath!);
+
+  kitchen.photo.public_id = response?.public_id || ""
+
+  kitchen.photo.url = response?.url || ""
+
+  await kitchen.save();
+
+  return res.status(200).json({
+      success:true,
+      message:"Profile Updated"
+  })
+
+  
+})

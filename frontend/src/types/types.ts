@@ -26,8 +26,16 @@ export type Order = {
 }
 
 export type Kitchen ={
+    _id:string
     name:string;
+    owner:string;
+    photo:{
+        public_id:string,
+        url:string
+    };
+    about:String;
     isOpenNow:boolean;
+    closedPermanent : boolean;
     reviews:[
         {
             user:string,
@@ -47,3 +55,58 @@ export type updateOrderStatus =  {
     user:string,
     id:string,
 }
+
+export type Dish ={
+    _id:string
+    name:string;
+    description:string;
+    photo:{
+        public_id:string,
+        url:string
+    };
+    price:number;
+    restaurant:Object;
+    cuisine:string
+    typeOfDish:"veg"|"non-veg";
+    isAvailableInJain:boolean;
+    allergens:string;
+}
+
+export type AddNewDishQuery = {
+    formData:FormData,
+    restaurant: string
+}
+
+export type getKitchensResponse = {
+    success:boolean,
+    kitchens:Kitchen[]
+}
+
+export type getKitchenResponse = {
+    success:boolean,
+    kitchen:Kitchen
+}
+
+export type cartInitialState = {
+    user: User // Use Types.ObjectId for clarity
+    restaurant: Kitchen
+  
+    address?: string; // Optional address
+  
+    items: {
+      name: string;
+      photo: {
+        public_id?: string; // Optional public_id
+        url: string;
+      };
+      price: number;
+      quantity: number;
+    }[];
+  
+    subTotal: number;
+    discount: number;
+    deliveryCharges: number;
+    total: number;
+  
+    status: "accepted" | "preparing" | "delivering";
+  } 
