@@ -46,17 +46,25 @@ function Home() {
           </div>
         </div>
       </div>
-      <Typography variant='h4' textAlign={"center"} margin={"1rem"} >Discover Soaring Clouds</Typography>
+      {
+        !user? null : (
+          <>
+            <Typography variant='h4' textAlign={"center"} margin={"1rem"} >Discover Soaring Clouds</Typography>
       <Container maxWidth={"xl"}sx={{
         display:"flex",
+        flexWrap:"wrap",
+        width:"100%",
         margin:"2rem 0",
         padding:"0 1rem",
         gap: "1rem"
-      }} >
+      }} className='justify-center lg:justify-start ' >
             {
               data?.kitchens.map((i)=>(<RestaurantCard kitchen={i} key={i.owner} />))
             }
       </Container>
+          </>
+        )
+      }
     </div>
   )
 }

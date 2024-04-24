@@ -57,7 +57,7 @@ export type updateOrderStatus =  {
 }
 
 export type Dish ={
-    _id:string
+    _id:Object
     name:string;
     description:string;
     photo:{
@@ -88,25 +88,23 @@ export type getKitchenResponse = {
 }
 
 export type cartInitialState = {
-    user: User // Use Types.ObjectId for clarity
-    restaurant: Kitchen
+    restaurnt?: Kitchen
   
-    address?: string; // Optional address
+    address: string; // Optional address
   
     items: {
+        _id?:Object;
       name: string;
       photo: {
-        public_id?: string; // Optional public_id
         url: string;
       };
       price: number;
       quantity: number;
-    }[];
+      restaurant:Object;
+    }[] ;
   
     subTotal: number;
-    discount: number;
-    deliveryCharges: number;
-    total: number;
-  
-    status: "accepted" | "preparing" | "delivering";
+    discount: number ;
+    deliveryCharges: number ;
+    total: number ;
   } 

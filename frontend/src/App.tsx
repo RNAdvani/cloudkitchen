@@ -10,13 +10,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { userInitialState } from './types/types'
 import { Toaster } from 'react-hot-toast'
 import Loader from './components/Loader'
-import ProtectedRotes from './components/ProtectedRotes'
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import Dashboard from './pages/admin/Dashboard'
 import KitchenPage from './pages/KitchenPage'
+import ProtectedRoutes from './pages/protectedRoutes'
 
 const Home = lazy(()=>import("./pages/Home"));
 const Login = lazy(()=>import("./pages/Login"));
@@ -54,12 +54,12 @@ function App() {
             <Route path='/'  element={<Home />} />
             {/* <Route path='/bar'  element={<BarCharts />} /> */}
           </Route>
-          <Route element={<ProtectedRotes isChef={true} />} >
+          <Route  >
             <Route path='/dishes'  element={<Dishes />} />
             <Route path='/bar'  element={<Dashboard />} />
           </Route>
 
-          <Route element={<ProtectedRotes isUser={true} />} >
+          <Route element={<><Header /><ProtectedRoutes isAuthenticated={true} /></>} >
             <Route path='/kitchen/:restaurant' element={<KitchenPage />} />
           </Route>
         </Routes>

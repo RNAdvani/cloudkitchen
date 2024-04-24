@@ -36,8 +36,6 @@ export const getDashboardStats = TryCatch(async(req,res,next)=>{
         numberOfOrders : numberOfOrders.reverse(),
         cuisineCount
     }
-    console.log(numberOfOrders)
-
     res.status(200).json({
         success:true,
         dashboard

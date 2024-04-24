@@ -23,7 +23,7 @@ function ChefPage() {
   const handleConfirm = ()=>{
     try {
       toggleKitchen(user?.owner!);
-      setChecked((prev)=>prev=!kitchen?.isOpenNow);
+      setChecked((prev)=>!prev);
     } catch (error) {
       throw new Error
     }
@@ -32,11 +32,13 @@ function ChefPage() {
 
 const handleClose = ()=>{
   setIsOpenModal(false);
+  console.log(checked)
 }
 
 const isOpenStatus = async()=>{
   try {
     const data = await isOpenStatusApi(user?.owner!);
+    setChecked(kitchen?.isOpenNow!)
     if("kitchen" in data){
       dispatch(kitchenExists(data.kitchen!));
     }else{
@@ -56,10 +58,10 @@ useEffect(()=>{
 },[checked])
 return (
   <div className="flex justify-center items-center h-[100%] flex-col w-[100%]">
-      <Confirmation isConfirm={isOpenModal} message={"Turn off"} funcClose={handleClose} funcConfirm={handleConfirm}/>
+      <Confirmation isConfirm={isOpenModal} message={`Turn ${checked ?"Off":"On"}`} funcClose={handleClose} funcConfirm={handleConfirm}/>
         <div className="container w-full flex justify-between items-center p-4 bg-[#FFD2A5] rounded-xl">
-            <h2 className="px-2 text-[1.1rem] font-[400] text-center">Turn {checked?"Off":"On"} your cloud</h2>
-            <Switch color="warning" checked={kitchen?.isOpenNow} onClick={()=>setIsOpenModal(true)}/>
+            <h2 className="px-2 text-[1.1rem] font-[400] text-center">Turn {checked ?"Off":"On"} your cloud</h2>
+            <Switch color="warning" checked={checked} onClick={()=>setIsOpenModal(true)}/>
         </div>
         <div className="relative w-full ">
         <div className="mx-auto flex flex-col-reverse max-w-7xl lg:grid lg:grid-cols-12 p-6 lg:gap-x-8 lg:px-8">

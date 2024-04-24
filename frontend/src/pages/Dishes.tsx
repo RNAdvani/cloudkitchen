@@ -1,4 +1,4 @@
-import DishCard from '../components/DishCard'
+import DishCard from '../components/admin/DishCard'
 import { useAddNewDishMutation, useGetAllMyDishesQuery } from '../redux/api/dishApi'
 import { useSelector } from 'react-redux'
 import { Dish, userInitialState } from '../types/types'

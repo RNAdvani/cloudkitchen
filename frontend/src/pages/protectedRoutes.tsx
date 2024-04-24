@@ -14,8 +14,6 @@ function ProtectedRoutes({isAuthenticated,isAdmin,adminRoute,children,redirect="
     if(!isAuthenticated) return <Navigate to={redirect} />
     // if(!isAdmin && adminRoute) return <Navigate to={redirect} />
     // if(!adminRoute && !isAdmin) return <Navigate to={redirect} />
-
-
     return children?children:<Outlet />
 }
 
