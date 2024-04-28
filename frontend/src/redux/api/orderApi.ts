@@ -11,14 +11,14 @@ export const orderApi = createApi({
     tagTypes:["Current-Orders"],
     endpoints:(builder)=>({
         getCurrentOrders:builder.query<currentOrdersResponse,updateOrderStatus>({
-            query:({id,user})=>({
+            query:({id})=>({
                 url:`${server}/api/v1/order/current/${id}`,
                 method:"GET",
             }),
             providesTags:["Current-Orders"]
         }),
         updateStatus:builder.mutation<MessageResponse,updateOrderStatus>({
-            query:({id,user})=>({
+            query:({id})=>({
                 url:`update/${id}`,
                 method:"POST",
             }),
