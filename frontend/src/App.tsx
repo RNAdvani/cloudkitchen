@@ -54,12 +54,12 @@ function App() {
             <Route path='/'  element={<Home />} />
             {/* <Route path='/bar'  element={<BarCharts />} /> */}
           </Route>
-          <Route  >
+          <Route element={<><Header /><Outlet /></>} >
             <Route path='/dishes'  element={<Dishes />} />
             <Route path='/bar'  element={<Dashboard />} />
           </Route>
 
-          <Route element={<><Header /><ProtectedRoutes isAuthenticated={true} /></>} >
+          <Route element={<><Header /><ProtectedRoutes isAuthenticated={true}  /></>} >
             <Route path='/kitchen/:restaurant' element={<KitchenPage />} />
           </Route>
         </Routes>
