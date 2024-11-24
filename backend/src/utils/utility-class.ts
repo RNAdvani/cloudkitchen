@@ -4,7 +4,6 @@ import { NextFunction, Request, Response } from "express";
 
 export const connectDb = (mongoUri:string)=>{
    mongoose.connect(mongoUri,{
-      dbName:"cloudkitchen"
    }).then(c=>console.log(`Db connected on ${c.connection.host}`)).catch(err=>console.log(err));
 }
 
