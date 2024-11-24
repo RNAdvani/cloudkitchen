@@ -107,4 +107,18 @@ export type cartInitialState = {
     discount: number ;
     deliveryCharges: number ;
     total: number ;
-  } 
+  }
+
+  export type orderType = {
+    user:string,
+    restaurant:string;
+    items:{
+      name: string;
+      price: number;
+      quantity: number;
+    }[];
+    subTotal: number;
+    discount: number ;
+    deliveryCharges: number ;
+    total: number ;
+  }

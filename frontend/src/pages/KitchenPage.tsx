@@ -34,7 +34,7 @@ const KitchenPage = () => {
 
   return (
     <Container maxWidth={"xl"}>
-        <img src={KitchenData?.kitchen?.photo?.url || ""} alt="" style={{height:"40vh",width:"100%"}}/>
+        <img src={KitchenData?.kitchen?.photo?.url || ""} alt="" style={{height:"45vh",width:"100%"}} className='bg-top object-cover' />
         <h5>{KitchenData?.kitchen.name}</h5>
         <Typography variant='caption'  >
             {KitchenData?.kitchen.about}

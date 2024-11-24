@@ -12,7 +12,7 @@ export default function RestaurantCard({kitchen}:{kitchen:Kitchen}) {
     <Link to={`/kitchen/${kitchen._id}`} >
         <Card sx={{borderRadius:"20px",width:345 }} >
       <CardActionArea >
-        <CardMedia
+        <CardMedia className='h-[150px]'
           component="img"
           height="140"
           image={kitchen.photo?.url}

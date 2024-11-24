@@ -23,6 +23,7 @@ export const cartReducer = createSlice({
             };
             price: number;
             quantity: number;
+            restaurant:Object
           }>)=>{
             state.items.push(action.payload);
             state.subTotal += action.payload.price;
@@ -35,20 +36,24 @@ export const cartReducer = createSlice({
                     i.quantity += action.payload.quantity === "inc" ? 1 : -1;
                }
                return i;
-            })
+            });
         },
         removeFromCart:(state,action:PayloadAction<{_id:Object}>)=>{
-            state.items.filter((i)=>i._id?.toString() !== action.payload._id.toString())
+            state.items.filter((i)=>(i._id?.toString() !== action.payload._id.toString()))
         }
         ,
         updateAmounts:(state)=>{
-            state.subTotal = state.items.reduce((acc,cur)=>(acc+(cur.price*cur.quantity)),0);
+            let sum = 0;
+            state.items.forEach((i)=>sum+=(i.quantity * i.price));
+            console.log(sum);
+            state.subTotal = sum;
             state.deliveryCharges = state.subTotal > 500 ? 0 : Math.min(0.1*state.subTotal,100);
             state.total = state.subTotal + state.deliveryCharges - state.discount;
         },
         emptyCart:(state)=>{
             state.address = "";
             state.deliveryCharges = 0;
+            state.items = [];
             state.total = 0;
             state.subTotal = 0;
             state.discount = 0 ;

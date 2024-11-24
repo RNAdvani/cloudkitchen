@@ -21,7 +21,7 @@ export const store = configureStore({
         [kitchenApi.reducerPath]:kitchenApi.reducer,
         [cartReducer.name]:cartReducer.reducer
     },
-    middleware:(mid)=>mid().concat([userAPI.middleware,chefApi.middleware,orderApi.middleware,dishApi.middleware,adminApi.middleware,kitchenApi.middleware])
+    middleware:(mid)=>mid({serializableCheck:false}).concat([userAPI.middleware,chefApi.middleware,orderApi.middleware,dishApi.middleware,adminApi.middleware,kitchenApi.middleware])
 })
 
 // middleware:(mid)=>mid().concat([userAPI.middleware,chefApi.middleware,orderApi.middleware,dishApi.middleware])

@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { server } from "./chefApi";
 import { MessageResponse, currentOrdersResponse } from "../../types/apiResponse";
-import { updateOrderStatus } from "../../types/types";
+import { orderType, updateOrderStatus } from "../../types/types";
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -24,6 +24,13 @@ export const orderApi = createApi({
             }),
             invalidatesTags:["Current-Orders"]
         }),
+        placeOrder:builder.mutation<MessageResponse,orderType>({
+            query:({items,deliveryCharges,discount,total,subTotal,restaurant,user})=>({
+                url:`new?user=${user}&restaurant=${restaurant}`,
+                method:"POST",
+                body:{items,deliveryCharges,discount,total,subTotal}
+            })
+        })
        
     })
 });
@@ -47,4 +54,4 @@ export const receivedOrders  = async({id,user}:updateOrderStatus)=>{
 }
 
 
-export const {useUpdateStatusMutation,useGetCurrentOrdersQuery} = orderApi
+export const {useUpdateStatusMutation,useGetCurrentOrdersQuery,usePlaceOrderMutation} = orderApi

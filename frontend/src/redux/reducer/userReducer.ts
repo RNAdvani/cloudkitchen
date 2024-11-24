@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { User, userInitialState } from "../../types/types";
 
 export const initialState:userInitialState={
@@ -18,7 +18,7 @@ export const userReducer = createSlice({
             state.user = null,
             state.loading = false
         }
-    }
+    },
 })
 
 

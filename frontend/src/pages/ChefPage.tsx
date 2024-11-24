@@ -20,9 +20,10 @@ function ChefPage() {
   const {kitchen} = useSelector((state:{kitchenReducer:kitchenInitialState})=>state.kitchenReducer)
   const [checked,setChecked] = useState(false);
 
-  const handleConfirm = ()=>{
+  const handleConfirm =async ()=>{
     try {
-      toggleKitchen(user?.owner!);
+      await toggleKitchen(user?.owner!);
+      setChecked(prev=>!prev)
     } catch (error) {
       throw new Error
     }
@@ -54,7 +55,7 @@ const {data:currentOrdersData} = useGetCurrentOrdersQuery({id:user?.owner!,user:
 
 useEffect(()=>{
   isOpenStatus() ;
-},[handleConfirm])
+},[checked])
 return (
   <div className="flex justify-center items-center h-[100%] flex-col w-[100%]">
       <Confirmation isConfirm={isOpenModal} message={`Turn ${checked ?"Off":"On"}`} funcClose={handleClose} funcConfirm={handleConfirm}/>
