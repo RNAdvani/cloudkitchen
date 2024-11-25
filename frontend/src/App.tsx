@@ -23,7 +23,6 @@ const Login = lazy(()=>import("./pages/Login"));
 const SignUp = lazy(()=>import("./pages/Register"));
 const Dishes = lazy(()=>import("./pages/Dishes"));
 const Cart = lazy(()=>import("./pages/Cart"))
-const Cart2 = lazy(()=>import("./pages/Cart2"))
 
 function App() {
 

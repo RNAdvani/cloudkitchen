@@ -2,7 +2,6 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { openStatusResponse } from "../../types/apiResponse";
-import { Kitchen } from "../../types/types";
 export const server = import.meta.env.VITE_BACKEND_SERVER
 
 export const chefApi = createApi({

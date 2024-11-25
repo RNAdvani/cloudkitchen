@@ -4,7 +4,7 @@ import CartCard from "../components/CartCard"
 import { Button, Typography } from "@mui/material"
 import { usePlaceOrderMutation } from "../redux/api/orderApi"
 import { responseToast } from "../util/misc"
-import { emptyCart, updateAmounts } from "../redux/reducer/cartReducer"
+import { emptyCart } from "../redux/reducer/cartReducer"
 
 const Cart = () => {
     const {items,deliveryCharges,discount,total,subTotal} = useSelector((state:{cartReducer:cartInitialState})=>state.cartReducer);

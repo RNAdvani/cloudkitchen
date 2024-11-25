@@ -7,7 +7,6 @@ import Loader from '../components/Loader'
 import { Container, Typography } from '@mui/material'
 import RestaurantCard from '../components/RestaurantCard'
 import { useGetKitchensQuery } from '../redux/api/kitchenApi'
-import { FileX } from 'lucide-react'
 
 
 
