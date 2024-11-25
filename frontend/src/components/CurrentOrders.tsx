@@ -1,6 +1,5 @@
-import toast from "react-hot-toast";
 import { Order, updateOrderStatus, userInitialState } from "../types/types"
-import { updateOrder, useUpdateStatusMutation} from '../redux/api/orderApi'
+import {  useUpdateStatusMutation} from '../redux/api/orderApi'
 import { useSelector } from "react-redux";
 import { memo } from "react";
 import { responseToast } from "../util/misc";

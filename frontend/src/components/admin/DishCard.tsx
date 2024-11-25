@@ -2,24 +2,14 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import {  CardActionArea, CardActions } from '@mui/material';
 import { Dish } from '../../types/types';
-import { Delete } from '@mui/icons-material'
-import { useNavigate } from 'react-router-dom';
-import { useDeleteDishMutation } from '../../redux/api/dishApi';
-import { responseToast } from '../../util/misc';
+
+
 
 export default function DishCard({dish}:{dish:Dish}) {
 
-    const [deleteDish] = useDeleteDishMutation()
-
-    const navigate = useNavigate();
-
-    const deleteHandler = async(id:string)=>{
-        console.log(id);
-        const res = await deleteDish(id);
-        responseToast(res,navigate,"/");
-     }
+    
   return (
     <Card >
       <CardActionArea  sx={{ width: "230px",height:"300px",}}>

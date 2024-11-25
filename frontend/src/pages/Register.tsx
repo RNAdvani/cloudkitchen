@@ -28,7 +28,7 @@ function Register({isUser}:{isUser:boolean}) {
   const [name,setName] = useState("");
   const [password,setPassword] = useState("");
   const [mobile,setMobile] = useState<number|null>(null);
-  const [file,setFile] = useState<File>();
+  const [file] = useState<File>();
 
 
     const [signup] = useSignupMutation();

@@ -10,7 +10,7 @@ interface Props{
 }
 
 
-function ProtectedRoutes({isAuthenticated,isAdmin,adminRoute,children,redirect="/"}:Props) {
+function ProtectedRoutes({isAuthenticated,children,redirect="/"}:Props) {
     if(!isAuthenticated) return <Navigate to={redirect} />
     // if(!isAdmin && adminRoute) return <Navigate to={redirect} />
     // if(!adminRoute && !isAdmin) return <Navigate to={redirect} />

@@ -1,8 +1,8 @@
 import DishCard from '../components/admin/DishCard'
 import { useAddNewDishMutation, useGetAllMyDishesQuery } from '../redux/api/dishApi'
 import { useSelector } from 'react-redux'
-import { Dish, userInitialState } from '../types/types'
-import { IconButton,Button, Stack, Typography, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, InputLabel, TextField, MenuItem, Select, FormControl, Avatar } from '@mui/material'
+import {  userInitialState } from '../types/types'
+import { Button, Stack, Typography, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, InputLabel, TextField, MenuItem, Select, Avatar } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
 import { ChangeEvent, useState } from 'react'
 import { VisuallyHiddenInput } from '../components/StyledComponents'
@@ -46,8 +46,8 @@ const Dishes = () => {
             reader.readAsDataURL(file);
             reader.onloadend = ()=>{
               if(typeof reader.result === "string"){
-                setPhoto((prev)=>file);
-                setPhotoPrev((prev)=>reader.result as string)
+                setPhoto(()=>file);
+                setPhotoPrev(()=>reader.result as string)
               }
             }
           }

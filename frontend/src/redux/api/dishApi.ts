@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { server } from "./chefApi";
 import {AllMyDishesResponse, MessageResponse } from "../../types/apiResponse";
-import { AddNewDishQuery, Dish } from "../../types/types";
 
 
 export const dishApi = createApi({

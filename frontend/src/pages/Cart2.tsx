@@ -10,10 +10,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
 
 export default function HorizontalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
-  const [skipped, setSkipped] = React.useState(new Set<number>());
 
-
-  
 
   const handleNext = () => {
   
@@ -29,7 +26,7 @@ export default function HorizontalLinearStepper() {
   return (
     <Box sx={{ width: '100%' }}>
       <Stepper activeStep={activeStep}>
-        {steps.map((label, index) => {
+        {steps.map((label) => {
           const stepProps: { completed?: boolean } = {};
           const labelProps: {
             optional?: React.ReactNode;

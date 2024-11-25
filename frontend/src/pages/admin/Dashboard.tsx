@@ -1,4 +1,3 @@
-import React from 'react'
 import BarCharts from './BarChart'
 
 const Dashboard = () => {

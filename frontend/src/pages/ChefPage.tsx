@@ -16,7 +16,7 @@ function ChefPage() {
   const dispatch = useDispatch();
   
   const [isOpenModal,setIsOpenModal] = useState(false);
-  const {user,loading} = useSelector((state:{userReducer:userInitialState})=>state.userReducer) 
+  const {user} = useSelector((state:{userReducer:userInitialState})=>state.userReducer) 
   const {kitchen} = useSelector((state:{kitchenReducer:kitchenInitialState})=>state.kitchenReducer)
   const [checked,setChecked] = useState(false);
 

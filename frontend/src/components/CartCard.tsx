@@ -1,7 +1,7 @@
 import {cartInitialState } from '../types/types'
 import { Button, ButtonGroup, Stack, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import {emptyCart, removeFromCart, updateAmounts, updateItemQuantity } from '../redux/reducer/cartReducer'
+import { removeFromCart, updateAmounts, updateItemQuantity } from '../redux/reducer/cartReducer'
 import { DeleteIcon } from 'lucide-react'
 
 
